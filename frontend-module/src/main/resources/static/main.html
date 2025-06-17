@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Кредитная заявка</title>
+    <style>
+        :root {
+          --main-color: #004085;
+          --accent-color: #007bff;
+          --bg-color: #f8f9fa;
+          --border-color: #ced4da;
+          --text-color: #212529;
+        }
+
+        body {
+          font-family: "Segoe UI", Tahoma, sans-serif;
+          background-color: var(--bg-color);
+          color: var(--text-color);
+          margin: 0;
+          padding: 40px 20px;
+          display: flex;
+          justify-content: center;
+        }
+
+        .container {
+          background: white;
+          padding: 30px 40px;
+          border-radius: 12px;
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+          max-width: 640px;
+          width: 100%;
+        }
+
+        h1 {
+          text-align: center;
+          color: var(--main-color);
+          margin-bottom: 30px;
+        }
+
+        h2 {
+          margin-top: 30px;
+          color: var(--main-color);
+          font-size: 1.2em;
+          border-bottom: 1px solid #dee2e6;
+          padding-bottom: 5px;
+        }
+
+        label {
+          display: block;
+          margin-top: 15px;
+          font-weight: 500;
+        }
+
+        input {
+          width: 100%;
+          padding: 10px;
+          margin-top: 6px;
+          border: 1px solid var(--border-color);
+          border-radius: 6px;
+          font-size: 1em;
+          box-sizing: border-box;
+        }
+
+        button {
+          margin-top: 30px;
+          padding: 12px 24px;
+          background-color: var(--accent-color);
+          color: white;
+          border: none;
+          border-radius: 6px;
+          font-size: 1em;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+          background-color: #0056b3;
+        }
+
+        .status {
+          margin-top: 30px;
+          font-size: 1.1em;
+          font-weight: bold;
+          text-align: center;
+        }
+
+        .status span {
+          color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Кредитная заявка</h1>
+    <form id="creditForm">
+        <h2>Информация о клиенте</h2>
+        <label>Имя <input name="firstName" required /></label>
+        <label>Фамилия <input name="lastName" required /></label>
+        <label>Дата рождения <input name="birthDate" type="date" required /></label>
+        <label>Email <input name="email" type="email" required /></label>
+        <label>Телефон <input name="phone" required /></label>
+        <label>Серия и номер паспорта <input name="passportNumber" required /></label>
+        <label>Дата выпуска паспорта <input name="passportIssueDate" type="date" required /></label>
+        <label>Кем выдан <input name="passportIssuedBy" required /></label>
+
+        <h2>Информация о кредите</h2>
+        <label>Сумма <input name="amount" type="number" required /></label>
+        <label>Срок (в месяцах) <input name="term" type="number" required /></label>
+        <label>Ставка (%) <input name="rate" type="number" step="0.01" required /></label>
+
+        <button type="submit">Отправить заявку</button>
+    </form>
+
+    <div class="status">Статус: <span id="status">Ожидается ввод</span></div>
+</div>
+
+<script>
+    document.getElementById('creditForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      document.getElementById('status').innerText = 'В работе';
+      const formData = new FormData(e.target);
+      const data = Object.fromEntries(formData.entries());
+      await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    });
+
+    const eventSource = new EventSource('/api/status');
+    eventSource.onmessage = (event) => {
+      const { status } = JSON.parse(event.data);
+      document.getElementById('status').innerText =
+        status === 'APPROVED' ? 'Одобрено' :
+        status === 'REJECTED' ? 'Отказано' :
+        status;
+    };
+</script>
+</body>
+</html>

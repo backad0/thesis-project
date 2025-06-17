@@ -1,0 +1,46 @@
+@startuml
+entity "Application" as Application {
+  * id : UUID
+  * person_info_id : UUID
+  * loan_info_id : UUID
+  * status_id : UUID
+  * decision: String?
+}
+
+entity "PersonInfo" as PersonInfo {
+  * id : UUID
+  * firstName : String
+  * lastName : String
+  * birthDate : Date
+  * email : String?
+  * phone : String?
+  * passport_info_id : UUID
+}
+
+entity "LoanInfo" as LoanInfo {
+  * id : UUID
+  * amount : BigDecimal
+  * term : Int
+  * interestRate : BigDecimal
+}
+
+entity "PassportInfo" as PassportInfo {
+  * id : UUID
+  * series : String
+  * number : String
+  * issuedBy : String
+  * issuedDate : Date
+}
+
+entity "ApplicationStatus" as ApplicationStatus {
+  * id : UUID
+  * status : String
+  * createdAt : DateTime
+  * updatedAt : DateTime
+}
+
+Application ||--|| PersonInfo : person
+Application ||--|| LoanInfo : loan
+Application ||--|| ApplicationStatus : status
+PersonInfo ||--|| PassportInfo : passport
+@enduml

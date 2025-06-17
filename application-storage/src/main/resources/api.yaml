@@ -1,0 +1,660 @@
+openapi: 3.0.0
+info:
+  title: Loan Application API
+  version: 1.0.0
+paths:
+  # Application Endpoints
+  /applications:
+    get:
+      summary: Get all applications
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApplicationResponse'
+    post:
+      summary: Create new application
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationCreate'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationResponse'
+
+  /applications/{id}:
+    get:
+      summary: Get application by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationResponse'
+    put:
+      summary: Update application
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationUpdate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationResponse'
+    delete:
+      summary: Delete application
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+
+  # PersonInfo Endpoints
+  /person-infos:
+    get:
+      summary: Get all person infos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonInfoResponse'
+    post:
+      summary: Create new person info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonInfoCreate'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonInfoResponse'
+
+  /person-infos/{id}:
+    get:
+      summary: Get person info by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonInfoResponse'
+    put:
+      summary: Update person info
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonInfoUpdate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonInfoResponse'
+    delete:
+      summary: Delete person info
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+
+  # LoanInfo Endpoints
+  /loan-infos:
+    get:
+      summary: Get all loan infos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoanInfoResponse'
+    post:
+      summary: Create new loan info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanInfoCreate'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoanInfoResponse'
+
+  /loan-infos/{id}:
+    get:
+      summary: Get loan info by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoanInfoResponse'
+    put:
+      summary: Update loan info
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanInfoUpdate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoanInfoResponse'
+    delete:
+      summary: Delete loan info
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+
+  # PassportInfo Endpoints
+  /passport-infos:
+    get:
+      summary: Get all passport infos
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PassportInfoResponse'
+    post:
+      summary: Create new passport info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PassportInfoCreate'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PassportInfoResponse'
+
+  /passport-infos/{id}:
+    get:
+      summary: Get passport info by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PassportInfoResponse'
+    put:
+      summary: Update passport info
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PassportInfoUpdate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PassportInfoResponse'
+    delete:
+      summary: Delete passport info
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+
+  # ApplicationStatus Endpoints
+  /application-statuses:
+    get:
+      summary: Get all application statuses
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ApplicationStatusResponse'
+    post:
+      summary: Create new application status
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationStatusCreate'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationStatusResponse'
+
+  /application-statuses/{id}:
+    get:
+      summary: Get application status by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationStatusResponse'
+    put:
+      summary: Update application status
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplicationStatusUpdate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationStatusResponse'
+    delete:
+      summary: Delete application status
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: No Content
+
+components:
+  schemas:
+    # Application Schemas
+    ApplicationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        person_info_id:
+          type: string
+          format: uuid
+        loan_info_id:
+          type: string
+          format: uuid
+        status_id:
+          type: string
+          format: uuid
+        decision:
+          type: string
+          nullable: true
+
+    ApplicationCreate:
+      type: object
+      required:
+        - person_info_id
+        - loan_info_id
+        - status_id
+      properties:
+        person_info_id:
+          type: string
+          format: uuid
+        loan_info_id:
+          type: string
+          format: uuid
+        status_id:
+          type: string
+          format: uuid
+        decision:
+          type: string
+          nullable: true
+
+    ApplicationUpdate:
+      type: object
+      properties:
+        person_info_id:
+          type: string
+          format: uuid
+        loan_info_id:
+          type: string
+          format: uuid
+        status_id:
+          type: string
+          format: uuid
+        decision:
+          type: string
+          nullable: true
+
+    # PersonInfo Schemas
+    PersonInfoResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        email:
+          type: string
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        passport_info_id:
+          type: string
+          format: uuid
+
+    PersonInfoCreate:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - birthDate
+        - passport_info_id
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        email:
+          type: string
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        passport_info_id:
+          type: string
+          format: uuid
+
+    PersonInfoUpdate:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        email:
+          type: string
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        passport_info_id:
+          type: string
+          format: uuid
+
+    # LoanInfo Schemas
+    LoanInfoResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        amount:
+          type: number
+          format: double
+        term:
+          type: integer
+        interestRate:
+          type: number
+          format: double
+
+    LoanInfoCreate:
+      type: object
+      required:
+        - amount
+        - term
+        - interestRate
+      properties:
+        amount:
+          type: number
+          format: double
+        term:
+          type: integer
+        interestRate:
+          type: number
+          format: double
+
+    LoanInfoUpdate:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+        term:
+          type: integer
+        interestRate:
+          type: number
+          format: double
+
+    # PassportInfo Schemas
+    PassportInfoResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        series:
+          type: string
+        number:
+          type: string
+        issuedBy:
+          type: string
+        issuedDate:
+          type: string
+          format: date
+
+    PassportInfoCreate:
+      type: object
+      required:
+        - series
+        - number
+        - issuedBy
+        - issuedDate
+      properties:
+        series:
+          type: string
+        number:
+          type: string
+        issuedBy:
+          type: string
+        issuedDate:
+          type: string
+          format: date
+
+    PassportInfoUpdate:
+      type: object
+      properties:
+        series:
+          type: string
+        number:
+          type: string
+        issuedBy:
+          type: string
+        issuedDate:
+          type: string
+          format: date
+
+    # ApplicationStatus Schemas
+    ApplicationStatusResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        status:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    ApplicationStatusCreate:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+
+    ApplicationStatusUpdate:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string

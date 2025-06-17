@@ -1,0 +1,53 @@
+@startuml
+
+
+actor User
+
+actor Employee
+
+node  "Frontend" {
+    component EmployeeServices
+}
+
+node "Backend" {
+
+    rectangle {
+        component ProductProcess
+        database Camunda
+    }
+
+    rectangle {
+        component ApplicationStorage
+        database ApplicationStorageDB
+    }
+
+    rectangle {
+        component PersonProfile
+        cloud CreditBureauApi
+    }
+
+    rectangle {
+        component AccountCreationService
+        cloud BankPartnerApi
+    }
+}
+
+User - Employee : Appointment
+Employee -- EmployeeServices : Request for ProductProcess
+
+EmployeeServices ... ProductProcess : kafka
+Camunda - ProductProcess : http
+
+ApplicationStorage .. ProductProcess : http
+ProductProcess .... PersonProfile : http
+ProductProcess .. AccountCreationService : kafka
+
+ApplicationStorage -- ApplicationStorageDB
+ApplicationStorage .. PersonProfile : http
+ApplicationStorage .. AccountCreationService : http
+
+PersonProfile -- CreditBureauApi
+
+AccountCreationService -- BankPartnerApi
+
+@enduml
