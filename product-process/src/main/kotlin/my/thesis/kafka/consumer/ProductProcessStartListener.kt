@@ -32,13 +32,5 @@ class ProductProcessStartListener(
         }
         productProcessService.startApplication(mapStartApplicationData(receivedMessage))
         acknowledgment.acknowledge()
-
-        productProcessService.sendProductProcessEndedNotification()
-        productProcessService.processApplicationReject()
-        productProcessService.processAccountCreationMessage()
-        productProcessService.sendAccountCreationMessage()
-        dal.getApplication()
-        dal.updateApplication()
-        dal.createApplication()
     }
 }

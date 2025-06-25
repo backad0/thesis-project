@@ -2,6 +2,7 @@ package my.thesis.api.impl
 
 import my.thesis.api.ApplicationCrudApi
 import my.thesis.mapper.mapApplicationToResponse
+import my.thesis.model.response.ApplicationResponse
 import my.thesis.service.ApplicationCrudService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController

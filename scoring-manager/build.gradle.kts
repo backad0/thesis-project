@@ -14,6 +14,7 @@ plugins {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui")
+    implementation("org.springframework.kafka:spring-kafka")
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("com.fasterxml.uuid:java-uuid-generator")
     implementation("org.apache.kafka:kafka-clients")
